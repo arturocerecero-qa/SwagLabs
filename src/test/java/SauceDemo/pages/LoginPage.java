@@ -12,7 +12,7 @@ public class LoginPage extends BaseClass {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy (id = "user-name") WebElement username;
+    public @FindBy(id = "user-name") WebElement username;
     public @FindBy(id = "password") WebElement password;
     public @FindBy(id = "login-button") WebElement loginBtn;
     public @FindBy (className = "error-button") WebElement error;

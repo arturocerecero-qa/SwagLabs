@@ -5,9 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -30,15 +28,15 @@ public class checkOutTest extends BaseClass {
         cartPage = new CartPage();
         checkoutPage = new CheckOutPage();
         homePage = new HomePage();
-
+    }
+    public void setupLogin() {
+        username = excelReader.getStringData("LoginValid", 1, 0);
+        password = excelReader.getStringData("LoginValid", 1, 1);
+        logIn(username, password);
     }
     @Test
-    public void CartButtonCheck () {
-//        For  valid users (predefined)
-        for (int i =1; i<= excelReader.getLastRow("LoginValid"); i++) {
-            username = excelReader.getStringData("LoginValid", i, 0);
-            password = excelReader.getStringData("LoginValid", 1, 1);
-            logIn(username,password);
+    public void CorrectCheckOut () {
+            setupLogin();
             homePage.addItemToCartBackPack();
             cartPage.clickOnShopingCartButton();
             cartPage.clickOnCheckOutButton();
@@ -48,7 +46,17 @@ public class checkOutTest extends BaseClass {
             checkOut(firstname,lastname,postcode);
             Assert.assertTrue(IsElementDisplayed(checkoutPage.OverviewLabel));
         }
+    @Test
+    public void CancelCheckOut(){
+        setupLogin();
+        homePage.addItemToCartJacket();
+        cartPage.clickOnShopingCartButton();
+        cartPage.clickOnCheckOutButton();
+        cartPage.cancelCheckOut();
+        Assert.assertTrue(IsElementDisplayed(cartPage.checkOutButton));
     }
+
+
     @AfterMethod
     public void shutDownTest () {
         driver.manage().deleteAllCookies();

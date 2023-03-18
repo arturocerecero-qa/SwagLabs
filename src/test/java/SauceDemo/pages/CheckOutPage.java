@@ -12,6 +12,7 @@ public class CheckOutPage extends BaseClass {
     public @FindBy(id="last-name") WebElement lastName;
     public @FindBy(id="postal-code")WebElement postalCode;
     public @FindBy(id="continue") WebElement continueBtn;
+
     public @FindBy(xpath = "//span[@class='title']") WebElement OverviewLabel;
 
     public void inputFirstName(String firstname){

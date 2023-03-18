@@ -10,6 +10,7 @@ public class CartPage extends BaseClass {
         PageFactory.initElements(driver,this);
     }
     public @FindBy(id = "checkout") WebElement checkOutButton;
+    public @FindBy(id="cancel") WebElement cancelBtn;
     public @FindBy (id = "shopping_cart_container") WebElement shopingCartButton;
 
     public void clickOnShopingCartButton () {
@@ -19,6 +20,8 @@ public class CartPage extends BaseClass {
         checkOutButton.click();
     }
 
-
+    public void cancelCheckOut(){
+        cancelBtn.click();
+    }
 
 }
